@@ -1,0 +1,32 @@
+:host {
+  display: block;
+  max-width: 800px;
+}
+
+.dialog-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.properties-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.custom-property {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.delete-button {
+  margin-right: auto;
+}
+
+mat-divider {
+  margin: 1rem 0;
+}

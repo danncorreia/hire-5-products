@@ -1,0 +1,18 @@
+.product-list-container {
+  padding: 2rem;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    h2 {
+      margin: 0;
+    }
+  }
+
+  .filter-field {
+    width: 100%;
+  }
+}
