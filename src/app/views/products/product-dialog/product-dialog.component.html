@@ -73,49 +73,10 @@
   </ng-container>
 
   <mat-divider></mat-divider>
-    <div class="properties-header">
-      <h3>Custom Properties</h3>
-
-      @if (isEditing()) {
-        <div class="add-property">
-          <button mat-stroked-button type="button" (click)="addCustomProperty()">
-            Add Property
-          </button>
-        </div>
-      }
-    </div>
-
-    @if (customProperties().length === 0) {
-      <div class="no-properties">
-        No custom properties available
-      </div>
-    } @else {
-      @for (prop of customProperties(); track $index) {
-        <div class="custom-property">
-          <mat-form-field appearance="outline">
-            <mat-label>Key</mat-label>
-            <input matInput [(ngModel)]="prop.key"
-                    [ngModelOptions]="{standalone: true}"
-                    [disabled]="!isEditing() && !isCreating()">
-          </mat-form-field>
-
-          <mat-form-field appearance="outline">
-            <mat-label>Value</mat-label>
-            <input matInput [(ngModel)]="prop.value"
-                    [ngModelOptions]="{standalone: true}"
-                    [disabled]="!isEditing() && !isCreating()">
-          </mat-form-field>
-
-          @if (isEditing() || isCreating()) {
-            <button mat-icon-button color="warn"
-                    type="button"
-                    (click)="removeCustomProperty($index)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          }
-        </div>
-      }
-    }
+  <app-custom-properties
+    [properties]="customProperties"
+    [isEditing]="isEditing() || isCreating()"
+  />
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">

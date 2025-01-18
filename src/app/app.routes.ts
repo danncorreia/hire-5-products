@@ -9,7 +9,7 @@ export const routes: Routes = [
   },
   {
     path: 'auth',
-    loadComponent: () => import('./views/auth/login/login.component').then(c => c.LoginComponent)
+    loadChildren: () => import('./views/auth/auth.routes').then(c => c.authRoutes)
   },
   {
     path: 'products',

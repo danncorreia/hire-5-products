@@ -13,6 +13,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { ConfirmDialogComponent } from '@views/shared/confirm-dialog/confirm-dialog.component';
 import { Observable } from 'rxjs';
+import { CustomPropertiesComponent } from './components/custom-properties/custom-properties.component';
+import { makeProduct } from '@dtos/product.dto';
 
 export interface DialogData {
   product?: Product;
@@ -32,7 +34,8 @@ export interface DialogData {
     MatButtonModule,
     MatProgressSpinnerModule,
     MatDividerModule,
-    MatIconModule
+    MatIconModule,
+    CustomPropertiesComponent
   ],
   templateUrl: './product-dialog.component.html',
   styleUrls: ['./product-dialog.component.scss']
@@ -140,11 +143,11 @@ export class ProductDialogComponent implements OnInit {
 
       if (this.isCreating()) {
         this.#productService.createProduct(product).subscribe({
-          next: () => this.#dialogRef.close(true)
+          next: () => this.onClose(true)
         });
       } else {
-        this.#productService.updateProduct(this.product()!.id, product).subscribe({
-          next: () => this.#dialogRef.close(true)
+        this.#productService.updateProduct(this.product()!.id, makeProduct(product)).subscribe({
+          next: () => this.onClose(true)
         });
       }
     }
@@ -152,15 +155,15 @@ export class ProductDialogComponent implements OnInit {
 
   onCancel(): void {
     if (this.isCreating()) {
-      this.#dialogRef.close();
+      this.onClose();
     } else {
       this.disableEditing();
       this.loadProduct();
     }
   }
 
-  onClose(): void {
-    this.#dialogRef.close();
+  onClose(resp: any = null): void {
+    this.#dialogRef.close(resp);
   }
 
   onDelete(): void {
@@ -168,7 +171,7 @@ export class ProductDialogComponent implements OnInit {
       this.openConfirmDialog('Are you sure you want to delete this product?').subscribe(result => {
         if (result) {
           this.#productService.deleteProduct(this.product()!.id).subscribe({
-            next: () => this.#dialogRef.close(true)
+            next: () => this.onClose(true)
           });
         }
       });

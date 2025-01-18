@@ -3,6 +3,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { ProductService } from './product.service';
 import { AuthService } from '@services/auth/auth.service';
 import { Product } from '@models/product.interface';
+import { makeProduct, ProductDTO } from '@dtos/product.dto';
 
 describe('ProductService', () => {
   let service: ProductService;
@@ -89,13 +90,16 @@ describe('ProductService', () => {
 
   describe('updateProduct', () => {
     it('should update an existing product', () => {
-      const updateData: Partial<Product> = {
+      const updateData: ProductDTO = makeProduct({
+        id: 1,
         name: 'Updated Name',
+        description: 'Updated Description',
+        sku: 'UPDATED-SKU-001',
         cost: 199.99,
         profile: {
           type: 'furniture'
         }
-      };
+      });
 
       service.updateProduct(1, updateData).subscribe(product => {
         expect(product).toEqual({ ...mockProduct, ...updateData });
