@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ProductDTO } from '@dtos/product.dto';
 import { Product } from '@models/product.interface';
 import { AuthService } from '@services/auth/auth.service';
 import { Observable } from 'rxjs';
@@ -31,7 +32,7 @@ export class ProductService {
     return this.http.post<Product>(this.apiUrl, product, { headers: this.getHeaders() });
   }
 
-  updateProduct(id: number, product: Partial<Product>): Observable<Product> {
+  updateProduct(id: number, product: ProductDTO): Observable<Product> {
     return this.http.patch<Product>(`${this.apiUrl}/${id}`, product, { headers: this.getHeaders() });
   }
 

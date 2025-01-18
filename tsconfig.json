@@ -23,7 +23,8 @@
       "@services/*": ["src/app/core/services/*"],
       "@models/*": ["src/app/core/models/*"],
       "@guards/*": ["src/app/core/guards/*"],
-      "@utils/*": ["src/app/core/utils/*"]
+      "@utils/*": ["src/app/core/utils/*"],
+      "@dtos/*": ["src/app/core/dtos/*"]
     }
   },
   "angularCompilerOptions": {
