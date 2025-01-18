@@ -1,0 +1,32 @@
+
+<mat-card appearance="outlined">
+  <mat-card-content [formGroup]="loginForm">
+    <h2>Welcome to Products</h2>
+
+    <div class="form">
+      <mat-form-field appearance="outline">
+        <mat-label>Authorization Token</mat-label>
+        <input
+          matInput
+          type="text"
+          id="token"
+          formControlName="token"
+          placeholder="Type your authorization token"
+          [class.error]="loginForm.get('token')?.invalid && loginForm.get('token')?.touched"
+        >
+        @if (loginForm.get('token')?.invalid && loginForm.get('token')?.touched) {
+          <mat-error>Token é needed</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    @if (error()) {
+      <div class="error-message">{{ error() }}</div>
+    }
+
+    <button class="login-button" mat-flat-button color="primary" (click)="onSubmit()" [disabled]="loginForm.invalid">
+      Login
+    </button>
+  </mat-card-content>
+
+</mat-card>
